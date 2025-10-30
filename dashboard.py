@@ -14,7 +14,7 @@ if uploaded is not None:
     st.write("Preview of Dataset:")
     st.dataframe(df)
 
-    # --- SIDEBAR CLEANING OPTIONS ---
+    
     st.sidebar.title('Options for Data Cleaning')
 
     if st.sidebar.button("Drop Null"):
@@ -25,7 +25,7 @@ if uploaded is not None:
         df.drop_duplicates(inplace=True)
         st.write("✅ Removed duplicates")
 
-    # --- MISSING VALUES ---
+   
     missing_cols = df.isnull().sum()
     st.write("🔍 Missing values in each column:")
     st.write(missing_cols[missing_cols > 0])
@@ -33,7 +33,6 @@ if uploaded is not None:
     st.write("🧾 Columns with missing values:")
     st.write(missing_cols)
 
-    # --- FILLING MISSING VALUES ---
     if not missing_cols[missing_cols > 0].empty:
         selected_col = st.selectbox("Select a column to fill missing values:", missing_cols.index)
 
@@ -60,11 +59,10 @@ if uploaded is not None:
             elif fill_method == "Fill with 'Missing'":
                 df[selected_col].fillna("Missing", inplace=True)
 
-    # --- Updated DataFrame ---
     st.subheader("Updated DataFrame:")
     st.dataframe(df)
 
-    # --- Plotting ---
+   
     st.sidebar.title("📈 Plot Options")
 
     all_cols = df.columns.tolist()
